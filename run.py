@@ -13,9 +13,11 @@ class TreasureHunt:
             self.board[i] = "□"
 
     def display_board(self):
-        """Display the game board."""
-        for i in range(0, len(self.board), 10):
-            line = ' '.join([f'{cell:<2}' for cell in self.board[i:i + 10]])
+        """Display the game board with row and column labels."""
+        print("   " + "  ".join([chr(65 + i) for i in range(10)]))
+        for i in range(10):
+            line = f"{i + 1:2d} "
+            line += "  ".join([self.board[i * 10 + j] for j in range(10)])
             print(line)
 
 
