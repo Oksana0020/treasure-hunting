@@ -1,3 +1,5 @@
+import random
+
 class TreasureHunt:
     def __init__(self):
         """
@@ -5,12 +7,24 @@ class TreasureHunt:
         """
         self.board = [" " for _ in range(100)]
         self.masked_board = ["□" for _ in range(100)]  
+        self.treasures = []
+        self.bombs = []
+        self.water = []
+        self.snakes = []
         self.game_on = True
 
     def initialize_board(self):
         """Initialize the game board."""
         for i in range(100):
             self.board[i] = "□"
+
+    def place_items(self):
+        """Place all items on the board"""
+        self.place_treasure()
+        self.place_bombs()
+        self.place_water()
+        self.place_snakes()
+
 
     def display_masked_board(self):
         """Display masked board with row numbers and column letters."""
