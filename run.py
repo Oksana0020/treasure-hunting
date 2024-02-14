@@ -109,6 +109,17 @@ class TreasureHunt:
             else:
                 self.update_masked_board(guess_index)
 
+    def update_masked_board(self, index):
+        """Update masked board according to hit"""
+        if index in self.water:
+            self.masked_board[index] = "💧"  # Update the masked board for water hit
+        elif index in self.bombs:
+            self.masked_board[index] = "💣"  # Update the masked board for bomb hit
+        elif index in self.snakes:
+            self.masked_board[index] = "🐍"  # Update the masked board for snake hit
+        else:
+            self.masked_board[index] = "❌"  # Update the masked board with a cross
+
     def evaluate_hit(self, index):
         """Function to evaluate hit"""
         if index in self.treasures:
@@ -164,11 +175,8 @@ class TreasureHunt:
 
 
 
-game = TreasureHunt()
-game.initialize_board()
-print("First Game Board:")
-game.display_board()
-game.display_masked_board()
-game.place_items()
-game.play()
+    game = TreasureHunt()
+    game.initialize_board()
+    game.place_items()
+    game.play()
 
