@@ -32,10 +32,22 @@ class TreasureHunt:
             self.board[treasure] = "💰"
 
     def place_bombs(self):
-        """# Function to place bombs on the board""""
+        """Function to place bombs on the board""""
         self.bombs = random.sample(range(100), 10)
         for bomb in self.bombs:
             self.board[bomb] = "💣"
+    
+        def place_water(self):
+        """Function to place water on the board"""
+        self.water = random.sample(range(100), 15)
+        for water in self.water:
+            self.board[water] = "💧"
+
+    def place_snakes(self):
+        """Function to place snakes on the board"""
+        self.snakes = random.sample(range(100), 25)
+        for snake in self.snakes:
+            self.board[snake] = "🐍"
 
 
     def display_masked_board(self):
