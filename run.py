@@ -63,6 +63,13 @@ class TreasureHunt:
         print(f"Hunter guessed: {hunter_guess}")
         self.hit(hunter_guess, "hunter")
         self.display_masked_board()
+    
+        def generate_hunter_guess(self):
+        """Generate Hunter guessing using random"""
+        while True:
+            guess = random.randint(0, 99)
+            if guess not in self.treasures + self.bombs + self.water + self.snakes:
+                return self.map_index_to_board_cell(guess)
 
     def display_masked_board(self):
         """Display masked board with row numbers and column letters."""
