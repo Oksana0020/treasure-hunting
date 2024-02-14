@@ -1,10 +1,10 @@
 import random
 
 class TreasureHunt:
+    """
+    Creates an instance of TreasureHunt
+    """
     def __init__(self):
-        """
-        Represents the game board and masked board available when game is on
-        """
         self.board = [" " for _ in range(100)]
         self.masked_board = ["□" for _ in range(100)]  
         self.treasures = []
@@ -72,7 +72,7 @@ class TreasureHunt:
                 return self.map_index_to_board_cell(guess)
 
     def hit(self, guess, player):
-        """Function to evaluate a hit on the board and
+        """Function for a hit on the board and
         Update if treasure found"""
         guess_index = self.map_guess_to_board_cell(guess)
         hit_result = self.evaluate_hit(guess_index)
@@ -88,6 +88,25 @@ class TreasureHunt:
                 self.masked_board[guess_index] = "💰"  
             else:
                 self.update_masked_board(guess_index)
+
+        def evaluate_hit(self, index):
+        """Function to evaluate hit"""
+        if index in self.treasures:
+            print("Wow! You found a treasure!")
+            return 1
+        elif index in self.bombs:
+            print("Oops!You hit a bomb!")
+            self.game_on = False
+            return 0
+        elif index in self.water:
+            print("You need to cross the river")
+            return 0
+        elif index in self.snakes:
+            print("Be aware! There are snakes. But you are lucky they are sleeping right now.")
+            return 0
+        else:
+            print("Mmm... I smell treasure is somewhere near you.")
+            return 0  
 
     def display_masked_board(self):
         """Display masked board with row numbers and column letters."""
