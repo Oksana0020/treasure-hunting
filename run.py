@@ -64,12 +64,30 @@ class TreasureHunt:
         self.hit(hunter_guess, "hunter")
         self.display_masked_board()
     
-        def generate_hunter_guess(self):
+    def generate_hunter_guess(self):
         """Generate Hunter guessing using random"""
         while True:
             guess = random.randint(0, 99)
             if guess not in self.treasures + self.bombs + self.water + self.snakes:
                 return self.map_index_to_board_cell(guess)
+
+    def hit(self, guess, player):
+        """Function to evaluate a hit on the board and
+        Update if treasure found"""
+        guess_index = self.map_guess_to_board_cell(guess)
+        hit_result = self.evaluate_hit(guess_index)
+        if player == "user":
+            self.user_hits += hit_result
+            if hit_result == 1:
+                self.masked_board[guess_index] = "💰"  
+            else:
+                self.update_masked_board(guess_index)
+        else:
+            self.hunter_hits += hit_result
+            if hit_result == 1:
+                self.masked_board[guess_index] = "💰"  
+            else:
+                self.update_masked_board(guess_index)
 
     def display_masked_board(self):
         """Display masked board with row numbers and column letters."""
