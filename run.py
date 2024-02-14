@@ -173,10 +173,13 @@ class TreasureHunt:
         column = index % 10
         return chr(ord('A') + column) + str(row + 1)
 
-
-
-    game = TreasureHunt()
-    game.initialize_board()
-    game.place_items()
-    game.play()
+if __name__ == "__main__":
+    while True:
+        game = TreasureHunt()
+        game.initialize_board()
+        game.place_items()
+        game.play()
+        choice = input("Would you like to play again? (1 for yes, 2 for no): ")
+        if choice != "1":
+            break
 
