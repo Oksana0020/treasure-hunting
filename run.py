@@ -13,7 +13,7 @@ class TreasureHunt:
             self.board[i] = "□"
 
     def display_masked_board(self):
-        """Display the masked board with row numbers and column letters."""
+        """Display masked board with row numbers and column letters."""
         print("    " + "  ".join([chr(65 + i) for i in range(10)]))
         for i in range(10):
             line = f"{i + 1:2d}  "
@@ -27,10 +27,30 @@ class TreasureHunt:
             line = f"{i + 1:2d}  "
             line += "  ".join([self.board[i * 10 + j] for j in range(10)])
             print(line)
+    
+    def map_guess_to_board_cell(self, guess):
+        """maps user guess to the corresponding index on the game board:
+        calculates the column index by subtracting the ASCII value of 'A' from the ASCII value of the first character 
+        of the guess,and row index by subtracting 1 from the integer value of the remaining characters of the guess"""
+        column = ord(guess[0]) - ord('A')
+        row = int(guess[1:]) - 1
+        return row * 10 + column
+
+    def map_index_to_board_cell(self, index):
+        """maps a board index to the corresponding cell on the game board
+        calculates row by dividing the index by 10 (because there are 10 cells per row) 
+        and column by taking the remainder of the index divided by 10,
+        then converts the row and column to their corresponding characters using ASCII and returns 
+        # board cell coordinates"""
+        row = index // 10
+        column = index % 10
+        return chr(ord('A') + column) + str(row + 1)
+
 
 
 game = TreasureHunt()
 game.initialize_board()
 print("First Game Board:")
 game.display_board()
+game.display_masked_board()
 
