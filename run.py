@@ -12,11 +12,19 @@ class TreasureHunt:
         for i in range(100):
             self.board[i] = "□"
 
-    def display_board(self):
-        """Display the game board with row and column labels."""
-        print("   " + "  ".join([chr(65 + i) for i in range(10)]))
+    def display_masked_board(self):
+        """Display the masked board with row numbers and column letters."""
+        print("    " + "  ".join([chr(65 + i) for i in range(10)]))
         for i in range(10):
-            line = f"{i + 1:2d} "
+            line = f"{i + 1:2d}  "
+            line += "  ".join([self.masked_board[i * 10 + j] for j in range(10)])
+            print(line)
+
+    def display_board(self):
+        """Display the game board with row numbers and column letters."""
+        print("    " + "  ".join([chr(65 + i) for i in range(10)]))
+        for i in range(10):
+            line = f"{i + 1:2d}  "
             line += "  ".join([self.board[i * 10 + j] for j in range(10)])
             print(line)
 
