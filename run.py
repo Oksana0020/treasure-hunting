@@ -34,12 +34,12 @@ class TreasureHunt:
             self.board[treasure] = "💰"
 
     def place_bombs(self):
-        """Function to place bombs on the board""""
+        """Function to place bombs on the board"""
         self.bombs = random.sample(range(100), 10)
         for bomb in self.bombs:
             self.board[bomb] = "💣"
     
-        def place_water(self):
+    def place_water(self):
         """Function to place water on the board"""
         self.water = random.sample(range(100), 15)
         for water in self.water:
@@ -50,6 +50,26 @@ class TreasureHunt:
         self.snakes = random.sample(range(100), 25)
         for snake in self.snakes:
             self.board[snake] = "🐍"
+
+    def play(self):
+        """Play function to create the play loop of the game.
+        It iterates continuously while the game is on"""
+        while self.game_on:
+            print("Your turn, Player:")
+            self.display_masked_board()
+            self.user_turn()
+            if self.user_hits == 3:
+                self.display_board()
+                print("Congratulations! You found 3 treasures and won the game!")
+                self.game_on = False
+                break
+            self.display_masked_board()
+            self.hunter_turn()
+            if self.hunter_hits == 3:
+                self.display_board()
+                print("Hunter found 3 treasures and won the game!")
+                self.game_on = False
+                break
 
     def user_turn(self):
         """Function for the user's turn from input"""
@@ -89,7 +109,7 @@ class TreasureHunt:
             else:
                 self.update_masked_board(guess_index)
 
-        def evaluate_hit(self, index):
+    def evaluate_hit(self, index):
         """Function to evaluate hit"""
         if index in self.treasures:
             print("Wow! You found a treasure!")
@@ -149,4 +169,6 @@ game.initialize_board()
 print("First Game Board:")
 game.display_board()
 game.display_masked_board()
+game.place_items()
+game.play()
 
