@@ -11,6 +11,8 @@ class TreasureHunt:
         self.bombs = []
         self.water = []
         self.snakes = []
+        self.user_hits = 0
+        self.hunter_hits = 0
         self.game_on = True
 
     def initialize_board(self):
@@ -49,6 +51,18 @@ class TreasureHunt:
         for snake in self.snakes:
             self.board[snake] = "🐍"
 
+    def user_turn(self):
+        """Function for the user's turn from input"""
+        user_guess = input("Your turn! Guess a spot by typing two symbols: first letter and second number between1 and 10 (e.g. A1): ").upper()
+        self.hit(user_guess, "user")
+
+    def hunter_turn(self):
+        """Function for the hunter's turn to generate and display hunter's turn"""
+        hunter_guess = self.generate_hunter_guess()
+        print("Hunter's turn:")
+        print(f"Hunter guessed: {hunter_guess}")
+        self.hit(hunter_guess, "hunter")
+        self.display_masked_board()
 
     def display_masked_board(self):
         """Display masked board with row numbers and column letters."""
