@@ -92,22 +92,19 @@ class TreasureHunt:
                 return self.map_index_to_board_cell(guess)
 
     def hit(self, guess, player):
-        """Function for a hit on the board and
-        Update if treasure found"""
-        guess_index = self.map_guess_to_board_cell(guess)
+        """Function for a hit on the board and Update if treasure found"""
+        if player == "user":
+            guess_index = self.map_guess_to_board_cell(guess)
+        else:
+            guess_index = guess
+
         hit_result = self.evaluate_hit(guess_index)
         if player == "user":
             self.user_hits += hit_result
-            if hit_result == 1:
-                self.masked_board[guess_index] = "💰"  
-            else:
-                self.update_masked_board(guess_index)
         else:
             self.hunter_hits += hit_result
-            if hit_result == 1:
-                self.masked_board[guess_index] = "💰"  
-            else:
-                self.update_masked_board(guess_index)
+
+        self.update_masked_board(guess_index)  
 
     def update_masked_board(self, index):
         """Update masked board according to hit"""
