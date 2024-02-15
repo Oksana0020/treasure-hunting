@@ -112,32 +112,33 @@ class TreasureHunt:
     def update_masked_board(self, index):
         """Update masked board according to hit"""
         if index in self.water:
-            self.masked_board[index] = "💧"  # Update the masked board for water hit
+            self.masked_board[index] = "💧"  
         elif index in self.bombs:
-            self.masked_board[index] = "💣"  # Update the masked board for bomb hit
+            self.masked_board[index] = "💣"  
         elif index in self.snakes:
-            self.masked_board[index] = "🐍"  # Update the masked board for snake hit
+            self.masked_board[index] = "🐍"  
+        elif index in self.treasures:
+            self.masked_board[index] = "💰"
         else:
-            self.masked_board[index] = "❌"  # Update the masked board with a cross
+            self.masked_board[index] = "❌"  
 
     def evaluate_hit(self, index):
         """Function to evaluate hit"""
-        if index in self.treasures:
+        if index in self.water:
+            print("You need to cross the river")
+            return 0
+        elif index in self.treasures:
             print("Wow! You found a treasure!")
             return 1
         elif index in self.bombs:
-            print("Oops!You hit a bomb!")
-            self.game_on = False
-            return 0
-        elif index in self.water:
-            print("You need to cross the river")
+            print("Oops! You hit a bomb!")
             return 0
         elif index in self.snakes:
             print("Be aware! There are snakes. But you are lucky they are sleeping right now.")
             return 0
         else:
-            print("Mmm... I smell treasure is somewhere near you.")
-            return 0  
+            print("Mmm... I smell treasure is somewhere near you")   
+            return 0   
 
     def display_masked_board(self):
         """Display masked board with row numbers and column letters."""
