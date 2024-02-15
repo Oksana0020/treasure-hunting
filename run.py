@@ -29,29 +29,29 @@ class TreasureHunt:
 
     def place_treasure(self):
         """Function to place treasures on the board"""
-        self.treasures = self.place_unique_items(25)
+        self.treasures = self.place_unique_items(25, "💰")
         for treasure in self.treasures:
             self.board[treasure] = "💰"
 
     def place_bombs(self):
         """Function to place bombs on the board"""
-        self.bombs = self.place_unique_items(25)
+        self.bombs = self.place_unique_items(25, "💣")
         for bomb in self.bombs:
             self.board[bomb] = "💣"
 
     def place_water(self):
         """Function to place water on the board"""
-        self.water = self.place_unique_items(25)
+        self.water = self.place_unique_items(25, "💧")
         for water in self.water:
             self.board[water] = "💧"
 
     def place_snakes(self):
         """Function to place snakes on the board"""
-        self.snakes = self.place_unique_items(25)
+        self.snakes = self.place_unique_items(25, "🐍")
         for snake in self.snakes:
             self.board[snake] = "🐍"
 
-    def place_unique_items(self, count):
+    def place_unique_items(self, count, symbol):
         """Helper function to place unique items on the board"""
         items_placed = 0
         items = set()
@@ -60,6 +60,7 @@ class TreasureHunt:
             if self.board[item] == "□":
                 items.add(item)
                 items_placed += 1
+                self.board[item] = symbol
         return list(items)
 
     def play(self):
