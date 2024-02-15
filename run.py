@@ -86,8 +86,14 @@ class TreasureHunt:
 
     def user_turn(self):
         """Function for the user's turn from input"""
-        user_guess = input("Your turn! Guess a spot by typing two symbols: first letter and second number between 1 and 10 (e.g. A1): ").upper()
-        self.hit(user_guess, "user")
+        while True:
+            user_guess = input("Your turn! Guess a spot by typing two symbols: first letter and second number between 1 and 10 (e.g. A1): ").upper()
+            guess_index = self.map_guess_to_board_cell(user_guess)
+            if self.masked_board[guess_index] != "□":
+                print("This spot is already open. Try one more time!")
+            else:
+                self.hit(user_guess, "user")
+                break
 
     def hunter_turn(self):
         """Function for the hunter's turn to generate and display hunter's turn"""
