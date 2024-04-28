@@ -15,6 +15,24 @@ class TreasureHunt:
         self.hunter_hits = 0
         self.game_on = True
 
+    @staticmethod
+    def display_rules():
+        """Display the short rules of the game."""
+        print("""
+        Welcome, Player!
+    
+        Rules:
+        1. The objective of the game is to find three treasures hidden on a 10x10 grid while avoiding obstacles.
+        2. Treasures are represented by 💰, bombs by 💣, water by 💧, and snakes by 🐍.
+        3. You'll take turns guessing spots on the map to reveal what's hidden there.
+        4. If you find a treasure, you earn a point. If you hit a bomb, the game ends.
+        5. Water and snakes are harmless but may affect your strategy.
+        6. The game ends when you find three treasures or hit three bombs.
+    
+        Let's begin!
+        """)
+    
+
     def initialize_board(self):
         """Initialize the game board."""
         for i in range(100):
@@ -238,6 +256,7 @@ class TreasureHunt:
         return chr(ord('A') + column) + str(row + 1)
 
 if __name__ == "__main__":
+    TreasureHunt.display_rules()
     while True:
         game = TreasureHunt()
         game.initialize_board()
