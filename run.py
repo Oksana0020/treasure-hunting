@@ -112,12 +112,31 @@ class TreasureHunt:
         """Function for the user's turn from input"""
         while True:
             user_guess = input("Your turn! Guess a spot by typing two symbols: first letter and second number between 1 and 10 (e.g. A1): ").upper()
-            guess_index = self.map_guess_to_board_cell(user_guess)
-            if self.masked_board[guess_index] != "□":
-                print("This spot is already open. Try one more time!")
+            if self.validate_guess(user_guess):
+                guess_index = self.map_guess_to_board_cell(user_guess)
+                if self.masked_board[guess_index] != "□":
+                    print("This spot is already open. Try one more time!")
+                else:
+                    self.hit(user_guess, "user")
+                    break
             else:
-                self.hit(user_guess, "user")
-                break
+                print("Invalid input! Please enter a letter between A-J and a number between 1-10.")
+
+    def validate_guess(self, guess):
+        """Validate the format of the user's guess"""
+        if len(guess) != 2:
+            return False
+        column = guess[0]
+        row = guess[1]
+        if column < 'A' or column > 'J':
+            return False
+        if not row.isdigit():
+            return False
+        row_num = int(row)
+        if row_num < 1 or row_num > 10:
+            return False
+        return True
+
 
     def hunter_turn(self):
         """Function for the hunter's turn to generate and display hunter's turn"""
@@ -226,4 +245,6 @@ if __name__ == "__main__":
         game.play()
         choice = input("Would you like to play again? (1 for yes, 2 for no): ")
         if choice != "1":
+            print("Goodbye! Have a nice day!")
             break
+
