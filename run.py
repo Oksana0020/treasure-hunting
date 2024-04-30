@@ -86,7 +86,7 @@ class TreasureHunt:
         It iterates continuously while the game is on.
         Picture of treasure is taken from https://trinket.io/python/e2f2419064"""
         while self.game_on:
-            print("Your turn, Player:")
+            print("Your turn, Player:\n")
             self.display_masked_board()
             self.user_turn()
             if self.user_hits == 3:
@@ -130,7 +130,7 @@ class TreasureHunt:
     def user_turn(self):
         """Function for the user's turn from input"""
         while True:
-            user_guess = input("Your turn! Guess a spot by typing two symbols: first letter and second number between 1 and 10 (e.g. A1): ").upper()
+            user_guess = input("Your turn! Guess a spot by typing two symbols: first letter and second number between 1 and 10 (e.g. A1): \n").upper()
             if self.validate_guess(user_guess):
                 guess_index = self.map_guess_to_board_cell(user_guess)
                 if self.masked_board[guess_index] != "□":
@@ -268,7 +268,7 @@ if __name__ == "__main__":
         game.initialize_board()
         game.place_items()
         game.play()
-        choice = input("Would you like to play again? (1 for yes, 2 for no): ")
+        choice = input("Would you like to play again? (1 for yes, 2 for no): \n")
         if choice != "1":
             print("Goodbye! Have a nice day!")
             break
