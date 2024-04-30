@@ -83,7 +83,8 @@ class TreasureHunt:
 
     def play(self):
         """Play function to create the play loop of the game.
-        It iterates continuously while the game is on"""
+        It iterates continuously while the game is on.
+        Picture of treasure is taken from https://trinket.io/python/e2f2419064"""
         while self.game_on:
             print("Your turn, Player:")
             self.display_masked_board()
@@ -142,17 +143,22 @@ class TreasureHunt:
 
     def validate_guess(self, guess):
         """Validate the format of the user's guess"""
-        if len(guess) != 2:
+        if len(guess) < 2 or len(guess) > 3:
             return False
+    
         column = guess[0]
-        row = guess[1]
+        row = guess[1:]
+
         if column < 'A' or column > 'J':
             return False
+
         if not row.isdigit():
             return False
+
         row_num = int(row)
         if row_num < 1 or row_num > 10:
             return False
+
         return True
 
 
